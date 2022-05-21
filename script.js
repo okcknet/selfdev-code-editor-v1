@@ -19,8 +19,24 @@ function run() {
     let codeCSS   = '<style>' + document.getElementById('codeCSS').value + '</style>';
     let runCode   = document.getElementById('runCode');
 
-    runCode.contentDocument.body.innerHTML = codeHTML + codeJS + codeCSS;
-    runCode.contentWindow.eval(codeJS);
+    runCode.contentDocument.body.innerHTML = codeHTML + codeCSS;   
+
+    // check syntax error of code
+    let validCode = 1;
+    try {
+      eval(codeJS); // test js code
+    } catch (error) {
+      if (error instanceof SyntaxError) {
+        validCode = 0;
+        alert('Syntax Error: ' + error);
+      }
+    } finally {
+      // console.log('validCode: ' + validCode);
+      if (validCode) {
+        // runCode.contentWindow.eval(codeJS);
+      }
+    }
+    
 
     // add event listener to runCode
     runCode.addEventListener('load', function() {
@@ -135,7 +151,7 @@ function run() {
     document.getElementById('codeJS').value = codeJS;
 
     // run code
-    run();
+    // run();
   }
   document.querySelector('#templateList').addEventListener('change', loadTemplate);
 
@@ -166,7 +182,7 @@ function run() {
       document.getElementById('codeJS').value = codeJS;
 
       // run code
-      run();
+      // run();
     }
   }
   window.onload = loadSession;
@@ -180,6 +196,9 @@ function run() {
   }
   // add event listener to minimize button
   minimizeButton.addEventListener('click', minimizeCodeEditor);
+
+  // run code with run button
+  runButton.addEventListener('click', run);
 
 
 
