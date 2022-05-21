@@ -6,3 +6,42 @@ body {
   margin: 0; height: 100vh;
   font-family: 'Noto Sans', sans-serif;
 }
+:root {
+  --border-radius: 4px;
+}
+
+textarea {
+  border: 1px solid #ddd;
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+textarea:focus {
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  display: inline-block;
+  /* transition: all 0.3s ease-in-out; */
+}
+.navbar a:hover {
+  color: #fff;
+  filter: brightness(1.2);
+}
+
+.okck--menu-sub {
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+}
+.okck--menu-sub > li:first-child {
+  margin-left: auto;
+}
+.okck--code-content textarea {
+  border: 1px solid #ddd;
+}
+.okck--code-content textarea:focus {
+  outline: none;
+}
