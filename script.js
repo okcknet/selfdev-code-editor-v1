@@ -1,5 +1,3 @@
-console.log('Hello World');
-
 const saveCode  = document.getElementById('saveCode');
 const codeName  = document.getElementById('codeName');
 const saveModal = document.getElementById('saveModal');
@@ -9,10 +7,12 @@ const saveCodeForm = document.getElementById('saveCodeForm');
 const saveCodeModal = document.getElementById('saveCodeModal');
 // const body = document.getElementsByTagName('body')[0];
 
+const minimizeButton = document.getElementById('minimizeButton');
+
 let templates = [];
 
 function run() {
-    console.log('Running');
+    // console.log('Running');
 
     let codeHTML  = document.getElementById('codeHTML').value;
     let codeJS    = document.getElementById('codeJS').value;
@@ -33,9 +33,10 @@ function run() {
     });
 
   }
-  document.querySelector('#codeHTML').addEventListener('keyup', run);
-  document.querySelector('#codeCSS').addEventListener('keyup', run);
-  document.querySelector('#codeJS').addEventListener('keyup', run);
+  // realtime run code
+  // document.querySelector('#codeHTML').addEventListener('keyup', run);
+  // document.querySelector('#codeCSS').addEventListener('keyup', run);
+  // document.querySelector('#codeJS').addEventListener('keyup', run);
 
   // save code with modal form
   function saveCodeTemplate(e) {
@@ -89,7 +90,7 @@ function run() {
     const templateList = document.getElementById('templateList');
     // get templates from local storage if available
     if (localStorage.getItem('templates') !== null) {
-      console.log('templates found');
+      // console.log('templates found');
       templates = JSON.parse(localStorage.getItem('templates'));
     } else {
       // create empty array if no templates in local storage
@@ -113,7 +114,7 @@ function run() {
       const item = document.createElement('option');
       item.textContent = templateName;
       item.value = templateName;
-      console.log(item);
+      // console.log(item);
       templateList.appendChild(item);
     });
 
@@ -153,6 +154,7 @@ function run() {
     // save to local storage
     localStorage.setItem('session', JSON.stringify(code));
   }
+  window.onbeforeunload = saveSession;
 
   // load session from local storage
   function loadSession() {
@@ -167,12 +169,29 @@ function run() {
       run();
     }
   }
-
-
-
-
   window.onload = loadSession;
-  window.onbeforeunload = saveSession;
+
+  // minimize code editor with minimize button
+  function minimizeCodeEditor() {
+    const codeEditor = document.getElementById('codeEditor');
+    console.log('minimize code editor');
+    // shrink code editor
+
+  }
+  // add event listener to minimize button
+  minimizeButton.addEventListener('click', minimizeCodeEditor);
+
+
+
+  // get keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    // console.log(e.keyCode);
+    if (e.keyCode === 83 && e.ctrlKey) {
+      e.preventDefault();
+      run();
+    }
+  });
+
 
   // saveCodeForm.addEventListener('submit', saveCodeTemplate() {
   //   let codeHTML  = document.getElementById('codeHTML').value;
