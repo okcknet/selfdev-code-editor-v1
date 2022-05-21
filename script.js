@@ -6,6 +6,9 @@ const saveModal = document.getElementById('saveModal');
 const templateName = document.getElementById('templateName');
 const saveCodeForm = document.getElementById('saveCodeForm');
 
+const saveCodeModal = document.getElementById('saveCodeModal');
+// const body = document.getElementsByTagName('body')[0];
+
 let templates = [];
 
 function run() {
@@ -47,13 +50,29 @@ function run() {
       codeCSS: codeCSS,
       codeJS: codeJS
     };
-    templates.push(code);
+
+    // if template name not exist, add template
+    if (templates.find((template) => template.templateName === templateName) === undefined) {
+      templates.push(code);
+    } else {
+      // if template name exist, replace template
+      const index = templates.findIndex((template) => template.templateName === templateName);
+      templates[index] = code;
+    }
 
     // save to local storage
     localStorage.setItem('templates', JSON.stringify(templates));
 
     // clear modal form
     saveCodeForm.reset();
+
+    // close modal
+    // saveCodeModal.classList.remove('show');
+    // saveCodeModal.classList.add('hide');
+    // body.classList.remove('modal-open');
+
+    // regenerate template list
+    buildTemplateList();
   }
   saveCodeForm.addEventListener('submit', saveCodeTemplate);
 
@@ -104,6 +123,23 @@ function run() {
   fetchTemplates();
 
 
+  // load template with selected template name
+  function loadTemplate(e) {
+    e.preventDefault();
+    const templateName = document.getElementById('templateList').value;
+    const template = templates.find((template) => template.templateName === templateName);
+    const { codeHTML, codeCSS, codeJS } = template;
+    document.getElementById('codeHTML').value = codeHTML;
+    document.getElementById('codeCSS').value = codeCSS;
+    document.getElementById('codeJS').value = codeJS;
+
+    // run code
+    run();
+  }
+  document.querySelector('#templateList').addEventListener('change', loadTemplate);
+
+
+
 
 
   // saveCodeForm.addEventListener('submit', saveCodeTemplate() {
@@ -123,3 +159,8 @@ function run() {
   //   a.click();
   //   URL.revokeObjectURL(url);
   // }
+
+
+  // self notes
+  // - save ettikten sonra modal kapanmiyor
+  // - template liste duplicate imiş gibi gosteriyor
