@@ -189,9 +189,17 @@ function run() {
 
   // minimize code editor with minimize button
   function minimizeCodeEditor() {
+    
+    const codeViewer = document.getElementById('codeViewer');
     const codeEditor = document.getElementById('codeEditor');
-    console.log('minimize code editor');
-    // shrink code editor
+
+    if (codeEditor.classList.contains('with-minimize')) {
+      codeViewer.classList.remove('with-minimize');
+      codeEditor.classList.remove('with-minimize');
+    } else {
+      codeViewer.classList.add('with-minimize');
+      codeEditor.classList.add('with-minimize');
+    }
 
   }
   // add event listener to minimize button

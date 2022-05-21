@@ -33,16 +33,16 @@
       </ul>
     </div>
   </nav>
-  
-  <section class="container-fluid">
+
+  <div class="container-fluid">
     <div class="row">
-      <div class="okck--code-content col col-md-12 p-3">
+      <div class="okck--code-viewer col col-md-12 p-3" id="codeViewer">
         <iframe src="" frameborder="0" id="runCode"></iframe>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="container-fluid" id="codeEditor">
+  <footer class="container-fluid fixed-bottom">
     <div class="row gx-3">
       <div class="col col-md-12">
         <ul class="okck--menu-sub nav p-2">
@@ -65,6 +65,8 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="okck--code-editor row gx-3" id="codeEditor">
       <div class="okck--code-js col col-md-4">
         <textarea id="codeJS" cols="30" rows="10" placeholder="JS"></textarea>
       </div>
@@ -74,10 +76,8 @@
       <div class="okck--code-css col col-md-4">
         <textarea id="codeCSS" cols="30" rows="10" placeholder="CSS"></textarea>
       </div>
-    </div>
-  </section>
-
-  <footer></footer>
+    </div>  
+  </footer>
 
   <!-- save code as template modal -->
   <div class="modal fade okck--code-save-modal" id="saveCodeModal" tabindex="-1" aria-hidden="true">
