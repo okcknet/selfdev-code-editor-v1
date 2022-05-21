@@ -139,8 +139,40 @@ function run() {
   document.querySelector('#templateList').addEventListener('change', loadTemplate);
 
 
+  // save session to local storage
+  function saveSession() {
+    const codeHTML = document.getElementById('codeHTML').value;
+    const codeCSS = document.getElementById('codeCSS').value;
+    const codeJS = document.getElementById('codeJS').value;
+    const code = {
+      codeHTML: codeHTML,
+      codeCSS: codeCSS,
+      codeJS: codeJS
+    };
+
+    // save to local storage
+    localStorage.setItem('session', JSON.stringify(code));
+  }
+
+  // load session from local storage
+  function loadSession() {
+    const session = JSON.parse(localStorage.getItem('session'));
+    if (session !== null) {
+      const { codeHTML, codeCSS, codeJS } = session;
+      document.getElementById('codeHTML').value = codeHTML;
+      document.getElementById('codeCSS').value = codeCSS;
+      document.getElementById('codeJS').value = codeJS;
+
+      // run code
+      run();
+    }
+  }
 
 
+
+
+  window.onload = loadSession;
+  window.onbeforeunload = saveSession;
 
   // saveCodeForm.addEventListener('submit', saveCodeTemplate() {
   //   let codeHTML  = document.getElementById('codeHTML').value;
