@@ -57,6 +57,53 @@ function run() {
   }
   saveCodeForm.addEventListener('submit', saveCodeTemplate);
 
+  // // load templates from local storage
+  // function loadTemplates() {
+  //   const loadedTemplates = JSON.parse(localStorage.getItem('templates'));
+  //   if (loadedTemplates !== null) {
+  //     templates = loadedTemplates;
+  //   }
+  // }
+
+  // fetch templates from local storage
+  function fetchTemplates() {
+    const templateList = document.getElementById('templateList');
+    // get templates from local storage if available
+    if (localStorage.getItem('templates') !== null) {
+      console.log('templates found');
+      templates = JSON.parse(localStorage.getItem('templates'));
+    } else {
+      // create empty array if no templates in local storage
+      templates = [{
+        templateName: 'Sample Template',
+        codeHTML: '<h1>Hello World</h1>',
+        codeCSS: 'h1 { font-weight: bold; }',
+        codeJS: 'console.log("Hello World");'
+      }, ];
+      localStorage.setItem('templates', JSON.stringify(templates));    
+    }
+    // loop through templates and add to list
+    buildTemplateList();
+  }
+
+  function buildTemplateList() {
+    // build template list
+    templates.forEach((template) => {
+      const { templateName, codeHTML, codeCSS, codeJS } = template;
+      // item
+      const item = document.createElement('option');
+      item.textContent = templateName;
+      item.value = templateName;
+      console.log(item);
+      templateList.appendChild(item);
+    });
+
+  }
+
+  // onload fetch templates
+  fetchTemplates();
+
+
 
 
   // saveCodeForm.addEventListener('submit', saveCodeTemplate() {
