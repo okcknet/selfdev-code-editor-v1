@@ -28,7 +28,10 @@
           </select>          
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-danger btn-sm ms-2" id="saveCode">SAVE</button>
+          <!-- button trigger save modal -->
+          <button type="button" class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#saveCodeModal">
+            SAVE
+          </button>
         </li>
       </ul>
     </div>
@@ -63,6 +66,25 @@
   </section>
 
   <footer></footer>
+
+  <!-- save code as template modal -->
+  <div class="modal fade okck--code-save-modal" id="saveCodeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form id="saveCodeForm">
+            <div class="form-group">
+              <label for="codeName" class="mb-2">Save Code as Template</label>
+              <input type="text" class="form-control form-control-sm" id="templateName" placeholder="Template Name">
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="submit" class="btn btn-danger btn-sm mt-2">Save Code</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+
 
   <script src="resources/libs/bootstrap-5.1.3/bootstrap.min.js"></script>
   <script src="script.js"></script>

@@ -45,3 +45,10 @@ textarea:focus {
 .okck--code-content textarea:focus {
   outline: none;
 }
+.okck--code-save-modal .btn-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+}
+.okck--code-save-modal form {
+  margin-bottom: .5rem;
+}

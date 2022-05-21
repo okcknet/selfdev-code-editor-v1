@@ -1,6 +1,12 @@
 console.log('Hello World');
 
-const saveCode = document.getElementById('saveCode');
+const saveCode  = document.getElementById('saveCode');
+const codeName  = document.getElementById('codeName');
+const saveModal = document.getElementById('saveModal');
+const templateName = document.getElementById('templateName');
+const saveCodeForm = document.getElementById('saveCodeForm');
+
+let templates = [];
 
 function run() {
     console.log('Running');
@@ -28,29 +34,32 @@ function run() {
   document.querySelector('#codeCSS').addEventListener('keyup', run);
   document.querySelector('#codeJS').addEventListener('keyup', run);
 
-  // save code to local storage with confirmation dialog
-  saveCode.addEventListener('click', function() {
-    let codeHTML  = document.getElementById('codeHTML').value;
-    let codeJS    = document.getElementById('codeJS').value;
-    let codeCSS   = document.getElementById('codeCSS').value;
-    let codeDate  = new Date();
-
-    let code = {
-        html: codeHTML,
-        js: codeJS,
-        css: codeCSS,
-        date: codeDate
+  // save code with modal form
+  function saveCodeTemplate(e) {
+    e.preventDefault();
+    const templateName = document.getElementById('templateName').value;
+    const codeHTML = document.getElementById('codeHTML').value;
+    const codeCSS = document.getElementById('codeCSS').value;
+    const codeJS = document.getElementById('codeJS').value;
+    const code = {
+      templateName: templateName,
+      codeHTML: codeHTML,
+      codeCSS: codeCSS,
+      codeJS: codeJS
     };
+    templates.push(code);
 
-    if (confirm('Save code?')) {
-        localStorage.setItem('code', JSON.stringify(code));
-    }
-  });
+    // save to local storage
+    localStorage.setItem('templates', JSON.stringify(templates));
+
+    // clear modal form
+    saveCodeForm.reset();
+  }
+  saveCodeForm.addEventListener('submit', saveCodeTemplate);
 
 
 
-
-  // saveCode.addEventListener('click', function() {
+  // saveCodeForm.addEventListener('submit', saveCodeTemplate() {
   //   let codeHTML  = document.getElementById('codeHTML').value;
   //   let codeJS    = document.getElementById('codeJS').value;
   //   let codeCSS   = document.getElementById('codeCSS').value;
