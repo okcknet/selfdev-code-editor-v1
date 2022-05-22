@@ -1,15 +1,12 @@
 // variables
-var HTML_CODE = `
-<h1>Lorem Ipsum</h1>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-`;
-var CSS_CODE = `
-body { font-family: sans-serif; }
-h1 { font-weight: bold; }
-`;
-var JS_CODE = `
-console.log('Lorem Ipsum');
-`;
+var HTML_CODE = 
+`<h1>Lorem Ipsum</h1>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>`;
+var CSS_CODE = 
+`body { font-family: sans-serif; }
+h1 { font-weight: bold; }`;
+var JS_CODE = 
+`console.log('Lorem Ipsum');`;
 
 
 const saveCode  = document.getElementById('saveCode');
@@ -130,6 +127,7 @@ function run() {
   }
 
   function buildTemplateList() {
+    
     // build template list
     templates.forEach((template) => {
       const { templateName, codeHTML, codeCSS, codeJS } = template;
@@ -173,12 +171,31 @@ function run() {
     // show toast message
     deletedTemplateToast.show();
 
-
+    // reload page
+    location.reload();
 
     // regenerate template list
     buildTemplateList();
   }
   document.querySelector('#deleteTemplate').addEventListener('click', deleteTemplate);
+
+  // clear code
+  function clearCode(e) {
+    e.preventDefault();
+    document.getElementById('codeHTML').value = '';
+    document.getElementById('codeCSS').value = '';
+    document.getElementById('codeJS').value = '';
+  }
+  document.querySelector('#clearCode').addEventListener('click', clearCode);
+
+  // load default code
+  function defaultCode(e) {
+    e.preventDefault();
+    document.getElementById('codeHTML').value = HTML_CODE;
+    document.getElementById('codeCSS').value = CSS_CODE;
+    document.getElementById('codeJS').value = JS_CODE;
+  }
+  document.querySelector('#defaultCode').addEventListener('click', defaultCode);
 
 
   // save session to local storage
@@ -242,25 +259,6 @@ function run() {
       run();
     }
   });
-
-
-  // saveCodeForm.addEventListener('submit', saveCodeTemplate() {
-  //   let codeHTML  = document.getElementById('codeHTML').value;
-  //   let codeJS    = document.getElementById('codeJS').value;
-  //   let codeCSS   = document.getElementById('codeCSS').value;
-  //   let code      = codeHTML + codeJS + codeCSS;
-  //   let blob      = new Blob([code], {type: "text/plain;charset=utf-8"});
-  //   saveAs(blob, "code.html");
-  // });
-
-  // function saveAs(blob, fileName) {
-  //   let url = URL.createObjectURL(blob);
-  //   let a = document.createElement('a');
-  //   a.href = url;
-  //   a.download = fileName;
-  //   a.click();
-  //   URL.revokeObjectURL(url);
-  // }
 
 
   // self notes

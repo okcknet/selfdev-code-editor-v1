@@ -42,9 +42,6 @@ textarea:focus {
   border: 1px solid #ddd;
   border-radius: var(--border-radius);
 }
-.okck--menu-sub > li:first-child {
-  margin-left: auto;
-}
 .okck--code-viewer {
   height: calc(100vh - 420px);
   background: #eee;
