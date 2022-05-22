@@ -99,22 +99,12 @@ function run() {
 
     // close modal
     saveCodeModal.toggle();
-    // saveCodeModal.classList.remove('show');
-    // saveCodeModal.classList.add('hide');
-    // body.classList.remove('modal-open');
 
     // regenerate template list
     buildTemplateList();
   }
   saveCodeForm.addEventListener('submit', saveCodeTemplate);
 
-  // // load templates from local storage
-  // function loadTemplates() {
-  //   const loadedTemplates = JSON.parse(localStorage.getItem('templates'));
-  //   if (loadedTemplates !== null) {
-  //     templates = loadedTemplates;
-  //   }
-  // }
 
   // fetch templates from local storage
   function fetchTemplates() {
@@ -169,6 +159,18 @@ function run() {
     // run();
   }
   document.querySelector('#templateList').addEventListener('change', loadTemplate);
+
+  // delete template
+  function deleteTemplate(e) {
+    e.preventDefault();
+    const templateName = document.getElementById('templateList').value;
+    const index = templates.findIndex((template) => template.templateName === templateName);
+    templates.splice(index, 1);
+    localStorage.setItem('templates', JSON.stringify(templates));
+    // regenerate template list
+    buildTemplateList();
+  }
+  document.querySelector('#deleteTemplate').addEventListener('click', deleteTemplate);
 
 
   // save session to local storage
@@ -254,5 +256,4 @@ function run() {
 
 
   // self notes
-  // - save ettikten sonra modal kapanmiyor
   // - template liste duplicate imiş gibi gosteriyor
