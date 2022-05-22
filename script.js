@@ -1,10 +1,24 @@
+// variables
+var HTML_CODE = `
+<h1>Lorem Ipsum</h1>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+`;
+var CSS_CODE = `
+body { font-family: sans-serif; }
+h1 { font-weight: bold; }
+`;
+var JS_CODE = `
+console.log('Lorem Ipsum');
+`;
+
+
 const saveCode  = document.getElementById('saveCode');
 const codeName  = document.getElementById('codeName');
 const saveModal = document.getElementById('saveModal');
 const templateName = document.getElementById('templateName');
 const saveCodeForm = document.getElementById('saveCodeForm');
 
-const saveCodeModal = document.getElementById('saveCodeModal');
+const saveCodeModal = new bootstrap.Modal(document.getElementById('saveCodeModal'));
 // const body = document.getElementsByTagName('body')[0];
 
 const minimizeButton = document.getElementById('minimizeButton');
@@ -84,6 +98,7 @@ function run() {
     saveCodeForm.reset();
 
     // close modal
+    saveCodeModal.toggle();
     // saveCodeModal.classList.remove('show');
     // saveCodeModal.classList.add('hide');
     // body.classList.remove('modal-open');
@@ -112,9 +127,9 @@ function run() {
       // create empty array if no templates in local storage
       templates = [{
         templateName: 'Sample Template',
-        codeHTML: '<h1>Hello World</h1>',
-        codeCSS: 'h1 { font-weight: bold; }',
-        codeJS: 'console.log("Hello World");'
+        codeHTML: HTML_CODE,
+        codeCSS: CSS_CODE,
+        codeJS: JS_CODE
       }, ];
       localStorage.setItem('templates', JSON.stringify(templates));    
     }
@@ -189,7 +204,7 @@ function run() {
 
   // minimize code editor with minimize button
   function minimizeCodeEditor() {
-    
+
     const codeViewer = document.getElementById('codeViewer');
     const codeEditor = document.getElementById('codeEditor');
 
