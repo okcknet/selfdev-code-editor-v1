@@ -43,12 +43,12 @@ textarea:focus {
   border-radius: var(--border-radius);
 }
 .okck--code-viewer {
-  height: calc(100vh - 420px);
+  height: calc(100vh - 460px);
   background: #eee;
   transition: height 0.3s ease-in-out;
 }
 .okck--code-viewer.with-minimize {
-  height: calc(100vh - 60px);
+  height: calc(100vh - 110px);
 }
 .okck--code-viewer iframe {
   width: 100%;
@@ -57,14 +57,25 @@ textarea:focus {
 }
 
 .okck--code-editor {
-  height: 300px;
+  height: 340px;
   transition: height 0.5s ease-in-out;
 }
 .okck--code-editor.with-minimize {
   height: 0;
 }
 
-.okck--code-content textarea {
+.okck--code-editor label {
+  margin-top: 1rem;
+  background-color: #212529;
+  color: #fff;
+  font-size: .75rem;
+  padding: .5rem 1rem;
+  width: 100%;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+.okck--code-editor textarea {
+  margin-top: 0; margin-bottom: 1rem;
   border: 1px solid #ddd;
 }
 .okck--code-content textarea:focus {

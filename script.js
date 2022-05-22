@@ -238,9 +238,11 @@ function run() {
     if (codeEditor.classList.contains('with-minimize')) {
       codeViewer.classList.remove('with-minimize');
       codeEditor.classList.remove('with-minimize');
+      minimizeButton.textContent = `Minimize`;
     } else {
       codeViewer.classList.add('with-minimize');
       codeEditor.classList.add('with-minimize');
+      minimizeButton.textContent = 'Maximize';
     }
 
   }
