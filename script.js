@@ -19,6 +19,8 @@ const templateName = document.getElementById('templateName');
 const saveCodeForm = document.getElementById('saveCodeForm');
 
 const saveCodeModal = new bootstrap.Modal(document.getElementById('saveCodeModal'));
+const deletedTemplateToast = new bootstrap.Toast(document.getElementById('deletedTemplateToast'));
+
 // const body = document.getElementsByTagName('body')[0];
 
 const minimizeButton = document.getElementById('minimizeButton');
@@ -167,6 +169,12 @@ function run() {
     const index = templates.findIndex((template) => template.templateName === templateName);
     templates.splice(index, 1);
     localStorage.setItem('templates', JSON.stringify(templates));
+
+    // show toast message
+    deletedTemplateToast.show();
+
+
+
     // regenerate template list
     buildTemplateList();
   }
