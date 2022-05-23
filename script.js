@@ -139,9 +139,6 @@ function run() {
     document.getElementById('codeHTML').value = codeHTML;
     document.getElementById('codeCSS').value = codeCSS;
     document.getElementById('codeJS').value = codeJS;
-
-    // run code
-    // run();
   }
   document.querySelector('#templateList').addEventListener('change', loadTemplate);
 
