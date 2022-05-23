@@ -71,16 +71,24 @@ textarea:focus {
   font-size: .75rem;
   padding: .5rem 1rem;
   width: 100%;
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
 }
 .okck--code-editor textarea {
   margin-top: 0; margin-bottom: 1rem;
   border: 1px solid #ddd;
 }
-.okck--code-content textarea:focus {
+.okck--code-editor textarea:focus {
   outline: none;
 }
+.okck--code-editor .col-md-4 {
+  transition: width 0.5s ease-in-out;
+}
+.okck--code-editor .col-md-4.with-maximize {
+  width: calc(100% - 200px);
+}
+.okck--code-editor .col-md-4.with-minimize {
+  width: 100px;
+}
+
 .okck--code-save-modal .btn-close {
   position: absolute;
   top: 1rem; right: 1rem;

@@ -67,6 +67,7 @@ function run() {
   // document.querySelector('#codeCSS').addEventListener('keyup', run);
   // document.querySelector('#codeJS').addEventListener('keyup', run);
 
+
   // save code with modal form
   function saveCodeTemplate(e) {
     e.preventDefault();
@@ -248,6 +249,43 @@ function run() {
   }
   // add event listener to minimize button
   minimizeButton.addEventListener('click', minimizeCodeEditor);
+
+  // maximize active code editor
+  function maximizeCodeEditor(e) {
+    e.preventDefault();
+
+    const parentElement = this.parentElement;
+    const codeEditors = parentElement.parentElement.children;
+
+    // loop through code editors
+    for (let i = 0; i < codeEditors.length; i++) {
+      const codeEditor = codeEditors[i];
+      if (codeEditor.classList.contains('with-minimize')) {
+        codeEditor.classList.remove('with-minimize');
+      }
+      if (codeEditor.classList.contains('with-maximize')) {
+        codeEditor.classList.remove('with-maximize');
+      }
+    }
+    parentElement.classList.add('with-maximize');
+
+    for (let i = 0; i < codeEditors.length; i++) {
+      if (!codeEditors[i].classList.contains('with-maximize')) {
+        codeEditors[i].classList.add('with-minimize');
+      }
+    }
+  }
+  // onload remove minimize class from code editor
+  window.onload = () => {
+    const codeEditors = document.querySelectorAll('.code-editor');
+    for (let i = 0; i < codeEditors.length; i++) {
+      codeEditors[i].classList.remove('with-minimize');
+    }
+  }
+  codeJS.addEventListener('click', maximizeCodeEditor);
+  codeCSS.addEventListener('click', maximizeCodeEditor);
+  codeHTML.addEventListener('click', maximizeCodeEditor);
+
 
   // run code with run button
   runButton.addEventListener('click', run);
