@@ -164,6 +164,12 @@ function run() {
   }
   document.querySelector('#deleteTemplate').addEventListener('click', deleteTemplate);
 
+  // if there is no template, hide delete template button
+  if (templates.length === 0) {
+    document.querySelector('#deleteTemplate').style.display = 'none';
+  }
+
+
   // clear code
   function clearCode(e) {
     e.preventDefault();
