@@ -274,7 +274,3 @@ function run() {
       run();
     }
   });
-
-
-  // self notes
-  // - template liste duplicate imiş gibi gosteriyor
