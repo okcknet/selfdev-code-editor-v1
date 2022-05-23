@@ -44,7 +44,6 @@ textarea:focus {
 }
 .okck--code-viewer {
   height: calc(100vh - 460px);
-  background: #eee;
   transition: height 0.3s ease-in-out;
 }
 .okck--code-viewer.with-minimize {
@@ -83,10 +82,10 @@ textarea:focus {
   transition: width 0.5s ease-in-out;
 }
 .okck--code-editor .col-md-4.with-maximize {
-  width: calc(100% - 200px);
+  width: calc(100% - 400px);
 }
 .okck--code-editor .col-md-4.with-minimize {
-  width: 100px;
+  width: 200px;
 }
 
 .okck--code-save-modal .btn-close {

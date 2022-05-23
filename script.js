@@ -3,7 +3,7 @@ var HTML_CODE =
 `<h1>Lorem Ipsum</h1>
 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>`;
 var CSS_CODE = 
-`body { font-family: sans-serif; }
+`body { font-family: sans-serif; line-height: 1.25; }
 h1 { font-weight: bold; }`;
 var JS_CODE = 
 `console.log('Lorem Ipsum');`;
@@ -17,50 +17,30 @@ const saveCodeForm = document.getElementById('saveCodeForm');
 
 const saveCodeModal = new bootstrap.Modal(document.getElementById('saveCodeModal'));
 const deletedTemplateToast = new bootstrap.Toast(document.getElementById('deletedTemplateToast'));
-
-// const body = document.getElementsByTagName('body')[0];
-
 const minimizeButton = document.getElementById('minimizeButton');
 
-let templates = [];
+let templates;
 
 function run() {
     // console.log('Running');
 
-    let codeHTML  = document.getElementById('codeHTML').value;
-    let codeJS    = document.getElementById('codeJS').value;
-    let codeCSS   = '<style>' + document.getElementById('codeCSS').value + '</style>';
+    // get code
+    let codeHTML = document.getElementById('codeHTML').value;
+    let codeCSS = '<style>' + document.getElementById('codeCSS').value + '</style>';
+    let codeJS = document.getElementById('codeJS').value;
     let runCode   = document.getElementById('runCode');
 
-    runCode.contentDocument.body.innerHTML = codeHTML + codeCSS;   
+    runCode.contentDocument.body.innerHTML = codeHTML + codeCSS;
+
+    // runCode.contentDocument.body.innerHTML = codeHTML + codeCSS;   
 
     // check syntax error of code
-    let validCode = 1;
     try {
       eval(codeJS); // test js code
+      // runCode.contentWindow.eval(valueCodeJS);
     } catch (error) {
-      if (error instanceof SyntaxError) {
-        validCode = 0;
-        alert('Syntax Error: ' + error);
-      }
-    } finally {
-      // console.log('validCode: ' + validCode);
-      if (validCode) {
-        // runCode.contentWindow.eval(codeJS);
-      }
+      alert('Syntax Error: ' + error);
     }
-    
-
-    // add event listener to runCode
-    runCode.addEventListener('load', function() {
-        console.log('Loaded');
-    });
-
-    // add event listener to runCode
-    runCode.addEventListener('error', function() {
-        console.log('Error');
-    });
-
   }
   // realtime run code
   // document.querySelector('#codeHTML').addEventListener('keyup', run);
@@ -108,18 +88,21 @@ function run() {
 
   // fetch templates from local storage
   function fetchTemplates() {
+    console.log('Fetching templates');
+    console.log(localStorage.getItem('templates'));
     const templateList = document.getElementById('templateList');
+
     // get templates from local storage if available
     if (localStorage.getItem('templates') !== null) {
-      // console.log('templates found');
+       console.log('templates found');
       templates = JSON.parse(localStorage.getItem('templates'));
     } else {
       // create empty array if no templates in local storage
       templates = [{
-        templateName: 'Sample Template',
-        codeHTML: HTML_CODE,
-        codeCSS: CSS_CODE,
-        codeJS: JS_CODE
+        templateName: '',
+        codeHTML: '',
+        codeCSS: '',
+        codeJS: ''
       }, ];
       localStorage.setItem('templates', JSON.stringify(templates));    
     }
@@ -131,13 +114,17 @@ function run() {
     
     // build template list
     templates.forEach((template) => {
-      const { templateName, codeHTML, codeCSS, codeJS } = template;
-      // item
-      const item = document.createElement('option');
-      item.textContent = templateName;
-      item.value = templateName;
-      // console.log(item);
-      templateList.appendChild(item);
+
+      // if template name is empty, don't add to list
+      if (template.templateName !== '') {
+        const { templateName, codeHTML, codeCSS, codeJS } = template;
+        // item
+        const item = document.createElement('option');
+        item.textContent = templateName;
+        item.value = templateName;
+        // console.log(item);
+        templateList.appendChild(item);
+      }
     });
 
   }
@@ -223,9 +210,6 @@ function run() {
       document.getElementById('codeHTML').value = codeHTML;
       document.getElementById('codeCSS').value = codeCSS;
       document.getElementById('codeJS').value = codeJS;
-
-      // run code
-      // run();
     }
   }
   window.onload = loadSession;
@@ -275,21 +259,12 @@ function run() {
       }
     }
   }
-  // onload remove minimize class from code editor
-  window.onload = () => {
-    const codeEditors = document.querySelectorAll('.code-editor');
-    for (let i = 0; i < codeEditors.length; i++) {
-      codeEditors[i].classList.remove('with-minimize');
-    }
-  }
   codeJS.addEventListener('click', maximizeCodeEditor);
   codeCSS.addEventListener('click', maximizeCodeEditor);
   codeHTML.addEventListener('click', maximizeCodeEditor);
 
-
   // run code with run button
   runButton.addEventListener('click', run);
-
 
   // get keyboard shortcuts
   document.addEventListener('keydown', function(e) {
