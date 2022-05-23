@@ -32,11 +32,11 @@ textarea:focus {
   filter: brightness(1.2);
 }
 
-#deletedTemplateToast {
+/* #deletedTemplateToast {
   position: absolute;
   top: 60px;
   right: 10px;
-}
+} */
 
 .okck--menu-sub {
   border: 1px solid #ddd;

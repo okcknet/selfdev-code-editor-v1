@@ -88,13 +88,10 @@ function run() {
 
   // fetch templates from local storage
   function fetchTemplates() {
-    console.log('Fetching templates');
-    console.log(localStorage.getItem('templates'));
     const templateList = document.getElementById('templateList');
 
     // get templates from local storage if available
     if (localStorage.getItem('templates') !== null) {
-       console.log('templates found');
       templates = JSON.parse(localStorage.getItem('templates'));
     } else {
       // create empty array if no templates in local storage
@@ -157,7 +154,7 @@ function run() {
     localStorage.setItem('templates', JSON.stringify(templates));
 
     // show toast message
-    deletedTemplateToast.show();
+    // deletedTemplateToast.show();
 
     // reload page
     location.reload();
